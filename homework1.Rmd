@@ -1,0 +1,108 @@
+---
+title: "Homework1"
+subtitle: "PSTAT 131"
+author: "Fuxin Tian"
+date: "2022-10-02"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question 1
+
+Define supervised and unsupervised learning. What are the difference(s) between them?
+
+Supervised learning is to build models which makes predictions based on known input  data and known responses to the data.
+Unsupervised learning is to find the hidden pattern of data based on input data with unknown responses.
+The difference is that supervised learning uses known input and output data and unsupervised uses unknown input and output data.
+
+## Question 2
+
+Explain the difference between a regression model and a classification model, specifically in the context of machine learning.
+
+According to the day_1 lecture page 33, although both of the algorithms are supervised learning algorithms, regression is used to predict quantitative or numerical values, while classification is used to predict qualitative or categorical values.
+
+## Question 3
+
+Name two commonly used metrics for regression ML problems. Name two commonly used metrics for classification ML problems.
+
+For the regression ML are Mean Squared Error(MSE) and Mean Absolute Error(MAE).
+For the classification ML are Accuracy and Precision.
+
+## Question 4
+
+According to our day_1 lecture page 39:
+predictive models is about what combo of features fist best and is aimed to predict Y with  minimum reducible error but not focused on hypothesis tests.
+
+Descriptive models is to choose model to best visually emphasize a trend in data.
+
+Inferential model is about what features are significant and is aimed to test theories.Also it states relationship between outcome & predictors.
+
+## Question 5
+
+Mechanistic models use the theories we have to predict the potential events in the real world. Empirically-driven models use the observations of real-world events to develop the theories.They are similar because they are both related to real-world events and the theories. However, mechanistic is to use the theories for the events but empirically-driven is to use the events for theories.
+
+I think the empirically-driven model is easier to understand. Because we are more familiar to what we experience in our real life than the theories we learnt from books or websites. Then it is much easier for us to understand our purpose and how we can deal with the problems we face.
+
+When we are analyzing data, we want to find a method so that both the variance and bias are low. So we should find a correct balance between the variance and bias to decide which method to use for an accurate result.
+
+## Question 6
+
+The first question should be predictive because it needs us to predict a future result based on the given past data.
+
+The second question should be inferential because it based more than the descriptive data and it focuses on the properties of the people through the process of testing.
+
+## Exercise 1
+
+```{r}
+library(tidyverse)
+library(tidymodels)
+library(ISLR)
+library(ggplot2)
+ggplot(mpg, aes(hwy)) + geom_histogram()
+```
+
+From the histogram above, we can see most of the data stay in the range from 15 to 30, and the number gets to the smallest when it comes to the range from 35 to 45. The distribution is right-skewed.
+
+## Exercise 2
+
+```{r}
+ggplot(mpg, aes(hwy, cty)) + geom_point()
+```
+
+From the graph above, we can see there is a linear relationship between variable hwy and cty. It means the value of cty will increase as the value of hwy increases.
+
+## Exercise 3
+
+```{r}
+ggplot(mpg, aes(y=reorder(manufacturer, manufacturer,length))) + geom_bar()
+```
+
+From the plot above, dodge produces the most cars and lincoln produce the least.
+
+## Exercise 4
+
+```{r}
+ggplot(mpg, aes(group = cyl, y = hwy)) + geom_boxplot()
+```
+
+The value of hwy is higher when that of cyl is lower. The value of hwy lower when that of cyl is higher.
+
+## Exercise 5
+
+```{r}
+library(corrplot)
+mpg.numeric = mpg[,sapply(mpg, is.numeric)]
+M  = cor(mpg.numeric)
+corrplot(M, method = 'square', type = 'lower', diag = FALSE)
+```
+
+There is a strongly positive correlation between cyl and displ.
+There is a strongly positive correlation between hwy and cty.
+There is a strongly negative correlation between cty and displ.
+There is a strongly negative correlation between hwy and displ.
+There is a strongly negative correlation between cty and cyl.
+There is a strongly negative correlation between hwy and cyl.
+Almost all the results make sense to me. But I once think the mileage is positively related to the cyl. However, they are negatively related.
